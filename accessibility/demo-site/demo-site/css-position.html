@@ -1,0 +1,105 @@
+<!doctype html>
+<!--
+  Source Material (c) 2016 GCD
+  All rights reserved
+
+  Also at https://jsfiddle.net/dwolvert/n7aj320b/
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CSS Position</title>
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="css/css-position.css"/>
+</head>
+<body ng-app>
+    <header>
+        <div class="logo">David's Demo</div>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <h1>CSS Positioning Demo</h1>
+        <article class="content">
+            <div class="container container-static">
+                <h2>container with default position</h2>
+                Choose the CSS position for <span ng-class="position" ng-style="applyOffset ? {top: offset + 'px', left: 2 * offset + 'px'} : {}">this span</span>.
+                This first <em>container</em> is default position (i.e. static).
+            </div>
+            <div class="container container-relative">
+                <h2>container with <em>relative</em> position</h2>
+                The CSS position will also be applied <span ng-class="position" ng-style="applyOffset ? {top: 2 * offset + 'px', left: offset + 'px'} : {}">this other span</span>.
+                This second <em>container</em> is relative position. You can see how
+                this affects the span's position in some cases.
+            </div>
+            <form>
+                <fieldset ng-init="position = 'static'" class="position-fields">
+                    <legend>CSS Position</legend>
+                    <p>
+                        <label><input type="radio" name="position" ng-model="position" value="static" checked/> static (default)</label>
+                        <em>stays put</em> -
+                        Static positioning leaves the element where it is in the document flow and ignores any offset.
+                    </p>
+                    <p>
+                        <label><input type="radio" name="position" ng-model="position" value="relative"/> relative</label>
+                        <em>placed relative to initial location</em> -
+                        Relative positioning leaves the element where it is in the document flow, but allows you to move the element
+                        with offset properties.
+                    </p>
+                    <p>
+                        <label><input type="radio" name="position" ng-model="position" value="absolute"/> absolute</label>
+                        <em>placed relative to parent</em> -
+                        Absolute position takes the element out of the document flow. It still stays where you left it if there is
+                        no offset specified. If there is an offset it moves to that exact position relative to the top corner of the
+                        page. To make it more complicated, though, if one of its ancestors has position relative then it will be
+                        positioned relative to that element's top corner not the corner of the whole page. The blue section
+                        illustrates this case.
+                    </p>
+                    <p>
+                        <label><input type="radio" name="position" ng-model="position" value="fixed"/> fixed</label>
+                        <em>placed relative to window (doesn't scroll)</em> -
+                        Fixed position takes the element out of the document flow. It still stays where you left it if there is
+                        no offset specified. If there is an offset it moves to that exact position relative to the top corner of the
+                        window. The element stays in the same spot on your screen even if you scroll the page.
+                    </p>
+                </fieldset>
+                <fieldset ng-init="applyOffset = false; offset = 0;" class="offset-fields">
+                    <legend>CSS Offset (Top and Left)</legend>
+                    <p>
+                        <label><input type="checkbox" name="applyOffset" ng-model="applyOffset" value="true"/> apply offset</label>
+                        The different positions interact differently with the 'top' and 'left' CSS offsets.
+                        It also makes a difference whether or not you specify top and left at all. Check this box to set top and left.
+                    </p>
+                    <p>
+                        <label><input type="range" name="offset" ng-model="offset" min="-100" max="100" step="5" value="0" ng-disabled="!applyOffset"> offset: {{offset}}</label>
+                        Use this to modify the 'top' and 'left' CSS properties.
+                    </p>
+<pre>{
+    position: {{position}};
+    left: {{applyOffset ? offset + 'px' : 'auto  /* default - no left */'}};
+    top: {{applyOffset ? offset + 'px' : 'auto  /* default - no top */'}};
+}</pre>
+                </fieldset>
+            </form>
+            <p class="spacing">I'm</p>
+            <p class="spacing">adding</p>
+            <p class="spacing">space</p>
+            <p class="spacing">at</p>
+            <p class="spacing">the</p>
+            <p class="spacing">end</p>
+            <p class="spacing">to</p>
+            <p class="spacing">make</p>
+            <p class="spacing">sure</p>
+            <p class="spacing">the</p>
+            <p class="spacing">page</p>
+            <p class="spacing">can</p>
+            <p class="spacing">scroll.</p>
+        </article>
+    </div> <!--/.wrapper-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+</body>
+</html>

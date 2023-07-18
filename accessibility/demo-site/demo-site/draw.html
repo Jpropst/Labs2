@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+  This is the kickoff example for functions. It can be used to illustrate two main purposes of functions...
+  1) reusability - 3 trees. what if we want to draw another house?
+  2) abstraction - which is easer to read?
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Demo Site</title>
+    <link rel="stylesheet" href="css/styles.css"/>
+    <style>
+        #canvas-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+        #canvas {
+            background-color: white;
+        }
+        #pos {
+            position: absolute;
+            margin: 2px 0 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">David's Demo</div>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <h1>Draw Functions Demo</h1>
+        <article>
+            <p>Open the dev tools. Go to the <em>sources</em> tab. Then check out <em>draw.js</em>. You can also run functions from the console.</p>
+            <ul>
+                <li>Click on the Canvas to see X/Y coordinates</li>
+                <li>Use these functions to add shapes
+                    <ul>
+                        <li><code>drawRectangle(topX, topY, width, height)</code></li>
+                        <li><code>drawLine(startX, startY, endX, endY)</code></li>
+                        <li><code>drawCircle(centerX, centerY, radius)</code></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p id="pos">Hello! This white box is the canvas.</p>
+            <div id="canvas-wrapper">
+                <canvas id="canvas" width="800" height="600"
+                style="border:1px solid #c3c3c3;"
+                onclick="document.getElementById('pos').innerHTML = 'X: ' + displayPixel(event.offsetX - X_CENTER) + ' Y: ' + displayPixel(event.offsetY - Y_CENTER) + ' ';">
+                Your browser does not support the canvas element.
+                </canvas>
+            </div>
+        </article>
+    </div> <!--/.wrapper-->
+
+    <script type="text/javascript">
+        var canvasWrapper = document.getElementById("canvas-wrapper");
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.lineWidth = 2;
+        var PIXELS_PER_UNIT = 30;
+        var X_CENTER = 400, Y_CENTER = 300;
+
+        function displayPixel(dist) {
+            return (dist / PIXELS_PER_UNIT).toFixed(1);
+        }
+
+        function drawRectangle(topX, topY, width, height) {
+            ctx.strokeRect(PIXELS_PER_UNIT * topX + X_CENTER, PIXELS_PER_UNIT * topY + Y_CENTER, PIXELS_PER_UNIT * width, PIXELS_PER_UNIT * height);
+        }
+
+        function drawLine(startX, startY, endX, endY) {
+            ctx.beginPath();
+            ctx.moveTo(PIXELS_PER_UNIT * startX + X_CENTER, PIXELS_PER_UNIT * startY + Y_CENTER);
+            ctx.lineTo(PIXELS_PER_UNIT * endX + X_CENTER, PIXELS_PER_UNIT * endY + Y_CENTER);
+            ctx.stroke();
+        }
+
+        function drawCircle(centerX, centerY, radius) {
+            ctx.beginPath();
+            ctx.arc(PIXELS_PER_UNIT * centerX + X_CENTER, PIXELS_PER_UNIT * centerY + Y_CENTER, PIXELS_PER_UNIT * radius, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        function resize() {
+            var width = canvasWrapper.offsetWidth;
+            var height = Math.floor(width * 3 / 4);
+            height = Math.min(height, window.innerHeight - 20);
+            canvas.width = width;
+            canvas.height = height;
+            X_CENTER = width / 2;
+            Y_CENTER = height / 2;
+            clear();
+        }
+
+        function clear() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "#eee";
+            // ctx.setLineDash([5, 5]);
+
+            var halfWidth = X_CENTER / PIXELS_PER_UNIT;
+            var halfHeight = Y_CENTER / PIXELS_PER_UNIT;
+
+            for (var x = -Math.floor(halfWidth); x <= Math.floor(halfWidth); x++) {
+                drawLine(x, -halfHeight, x, halfHeight);
+            }
+            for (var y = -Math.floor(halfHeight); y <= Math.floor(halfHeight); y++) {
+                drawLine(-halfWidth, y, halfWidth, y);
+            }
+
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#ccc";
+
+            drawLine(0, -halfHeight, 0, halfHeight);
+            drawLine(-halfWidth, 0, halfWidth, 0);
+
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#000";
+            // ctx.setLineDash([]);
+        }
+
+        window.addEventListener("load", resize);
+        window.addEventListener("resize", resize);
+
+        console.log("Here are the drawing functions you can use...\n\n" +
+                    " drawRectangle(topX, topY, width, height)\n" +
+                    " drawLine(startX, startY, endX, endY)\n" +
+                    " drawCircle(centerX, centerY, radius)");
+    </script>
+    <script src="draw.js" charset="utf-8"></script>
+</body>
+</html>
