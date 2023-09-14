@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ff8c00;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    background-color: #9932cc;
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+}
+
+#search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#subreddit-input {
+    padding: 5px;
+}
+
+#fetch-button {
+    padding: 5px 10px;
+    background-color: #9932cc;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+#fetch-button:hover {
+    background-color: #660099;
+}
+
+#posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.post {
+    background-color: #9932cc;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+
+.post-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.post-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.post-link a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
