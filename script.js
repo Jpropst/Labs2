@@ -1,19 +1,35 @@
-const name1 = "Joshua";
-const name2 = "Troy";
-const name3 = "Aaron";
+// test Run A/C
+let desiredTemp = 74;
+// let actualTemp = 78;
+//test run heat 
+// let actualTemp = 70;
+//test standby
+let actualTemp = 70;
 
-if (name1.length > name2.length && name1.length > name3.length)  {
-    console.log(`${name1} has the longest name.`);
-    }   else if (name2.length > name1.length && name2.length > name3.length)    {
-        console.log(`${name2} has the longest name.`);
-    }   else if (name3.length > name1.length && name3.length > name2.length)    {
-        console.log(`${name3} has the longest name.`);
-    }   else if (name1.length === name2.length) {
-        console.log(`${name1} and ${name2} tie for the longest name.`);
-    }   else if (name1.length === name3.length) {
-        console.log(`${name1} and ${name3} tie for the longest name.`);
-    }   else if (name2.length === name3.length) {
-        console.log(`${name2} and ${name3} tie for the longest name.`);
-    }   else if (name2.length === name1.length && name2.length === name3.length && name1.length === name3.length)  {
-        console.log(`${name1} and ${name2} and ${name3} tie for the longest name.`);
-    }
+if (actualTemp > desiredTemp) {
+    console.log('Run A/C');
+}   else if (actualTemp < desiredTemp) {
+    console.log('Run heat');
+}   else (actualTemp === desiredTemp); {
+    console.log('Standby');
+}
+
+// const name1 = "Joshua";
+// const name2 = "Troy";
+// const name3 = "Aaron";
+
+// if (name1.length > name2.length && name1.length > name3.length)  {
+//     console.log(`${name1} has the longest name.`);
+//     }   else if (name2.length > name1.length && name2.length > name3.length)    {
+//         console.log(`${name2} has the longest name.`);
+//     }   else if (name3.length > name1.length && name3.length > name2.length)    {
+//         console.log(`${name3} has the longest name.`);
+//     }   else if (name1.length === name2.length) {
+//         console.log(`${name1} and ${name2} tie for the longest name.`);
+//     }   else if (name1.length === name3.length) {
+//         console.log(`${name1} and ${name3} tie for the longest name.`);
+//     }   else if (name2.length === name3.length) {
+//         console.log(`${name2} and ${name3} tie for the longest name.`);
+//     }   else if (name2.length === name1.length && name2.length === name3.length && name1.length === name3.length)  {
+//         console.log(`${name1} and ${name2} and ${name3} tie for the longest name.`);
+//     }
